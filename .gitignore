@@ -1,0 +1,22 @@
+# IDE
+.idea/
+.vscode/
+
+# Docker
+docker-compose.override.yml
+
+# Backend
+/khidma-back/var/
+/khidma-back/vendor/
+/khidma-back/.env.local
+/khidma-back/.env.*.local
+
+# Frontend
+/khidma-front/node_modules/
+/khidma-front/.angular/
+/khidma-front/dist/
+/khidma-front/.env
+
+# System Files
+.DS_Store
+Thumbs.db

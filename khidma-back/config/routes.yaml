@@ -1,0 +1,17 @@
+# Documentation Swagger UI
+app.swagger_ui:
+    path: /api/doc
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger_ui }
+
+# Documentation au format JSON
+app.swagger.json:
+    path: /api/doc.json
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger }
+
+# Routes API
+api_geo:
+    resource: App\Controller\GeoSearchController
+    type: attribute
+    prefix: /api

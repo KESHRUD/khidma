@@ -1,0 +1,42 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: Khidma API
+            description: API de services de proximité
+            version: 1.0.0
+        components:
+            securitySchemes:
+                Bearer:
+                    type: http
+                    scheme: bearer
+                    bearerFormat: JWT
+        security:
+            - Bearer: []
+        paths:
+            /api/login_check:
+                post:
+                    tags:
+                        - Authentication
+                    summary: Authentification utilisateur
+                    requestBody:
+                        content:
+                            application/json:
+                                schema:
+                                    properties:
+                                        email:
+                                            type: string
+                                        password:
+                                            type: string
+                    responses:
+                        '200':
+                            description: Token JWT
+                            content:
+                                application/json:
+                                    schema:
+                                        properties:
+                                            token:
+                                                type: string
+    areas:
+        path_patterns:
+            - ^/api(?!/doc$)
+            - ^/api(?!/doc.json$)

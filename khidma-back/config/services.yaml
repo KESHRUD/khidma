@@ -1,0 +1,42 @@
+# config/services.yaml
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    # Configuration explicite du UserPasswordHasher
+    App\State\UserPasswordHasher:
+        bind:
+            $processor: '@api_platform.doctrine.orm.state.persist_processor'
+
+    # Déclaration du service comme processeur API Platform
+    app.state.user_password_hasher:
+        class: App\State\UserPasswordHasher
+        arguments:
+            $processor: '@api_platform.doctrine.orm.state.persist_processor'
+            $passwordHasher: '@security.user_password_hasher'
+        tags: ['api_platform.state_processor']
+
+    App\State\ServiceProcessor:
+        arguments:
+            $persistProcessor: '@api_platform.doctrine.orm.state.persist_processor'
+        tags: ['api_platform.state_processor']
+
+    App\State\ReviewProcessor:
+        arguments:
+            $persistProcessor: '@api_platform.doctrine.orm.state.persist_processor'
+        tags: ['api_platform.state_processor']
+
+    monolog.logger.geocoding:
+        class: Symfony\Bridge\Monolog\Logger
+        arguments: ['geocoding']
+
+    # Alias pour ProcessorInterface
+    ApiPlatform\State\ProcessorInterface: '@api_platform.doctrine.orm.state.persist_processor'

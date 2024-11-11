@@ -1,0 +1,9 @@
+monolog:
+    channels: ['geocoding']
+    handlers:
+        geocoding:
+            type: rotating_file
+            path: '%kernel.logs_dir%/geocoding.log'
+            level: info
+            channels: ['geocoding']
+            max_files: 10
